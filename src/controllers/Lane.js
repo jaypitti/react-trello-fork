@@ -73,6 +73,11 @@ class Lane extends Component {
     this.props.actions.removeCard({laneId: this.props.id, cardId: cardId})
   }
 
+  updateCard = (cardId, card) => {
+    this.props.onCardChange && this.props.onCardChange(cardId, card)
+    this.props.actions.updateCard({laneId: this.props.id, card: card})
+  }
+
   handleCardClick = (e, card) => {
     const {onCardClick} = this.props
     onCardClick && onCardClick(card.id, card.metadata, card.laneId)
@@ -204,7 +209,7 @@ class Lane extends Component {
     this.props.onLaneUpdate(this.props.id, {title: value})
   }
 
-  renderHeader = (pickedProps) => {
+  renderHeader = pickedProps => {
     const {components} = this.props
     return (
       <components.LaneHeader
@@ -303,7 +308,4 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(laneActions, dispatch)
 })
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Lane)
+export default connect(null, mapDispatchToProps)(Lane)
