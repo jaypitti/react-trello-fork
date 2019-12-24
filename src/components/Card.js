@@ -1,14 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  MovableCardWrapper,
-  CardHeader,
-  CardRightContent,
-  CardTitle,
-  Detail,
-  Footer
-} from 'rt/styles/Base'
+import {MovableCardWrapper, CardHeader, CardRightContent, CardTitle, Detail, Footer} from 'rt/styles/Base'
 import Tag from './Card/Tag'
 import DeleteButton from 'rt/widgets/DeleteButton'
 
@@ -18,7 +11,7 @@ class Card extends Component {
     e.stopPropagation()
   }
 
-  render()  {
+  render() {
     const {
       showDeleteButton,
       style,
@@ -35,27 +28,23 @@ class Card extends Component {
     } = this.props
 
     return (
-      <MovableCardWrapper
-        data-id={id}
-        onClick={onClick}
-        style={style}
-        className={className}
-      >
+      <MovableCardWrapper data-id={id} onClick={onClick} style={style} className={className}>
         <CardHeader>
           <CardTitle draggable={cardDraggable}>{title}</CardTitle>
           <CardRightContent>{label}</CardRightContent>
           {showDeleteButton && <DeleteButton onClick={this.onDelete} />}
         </CardHeader>
         <Detail>{description}</Detail>
-        {tags && tags.length> 0 && (
-          <Footer>
-            {tags.map(tag => (
-              <Tag key={tag.title} {...tag} tagStyle={tagStyle} />
-            ))}
-          </Footer>
-        )}
+        {tags &&
+          tags.length > 0 && (
+            <Footer>
+              {tags.map(tag => (
+                <Tag key={tag.title} {...tag} tagStyle={tagStyle} />
+              ))}
+            </Footer>
+          )}
       </MovableCardWrapper>
-      )
+    )
   }
 }
 
@@ -70,7 +59,7 @@ Card.propTypes = {
   title: PropTypes.string.isRequired,
   label: PropTypes.string,
   description: PropTypes.string,
-  tags: PropTypes.array,
+  tags: PropTypes.array
 }
 
 Card.defaultProps = {
